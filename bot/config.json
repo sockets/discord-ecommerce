@@ -1,0 +1,6 @@
+{
+	"prefix": "s!",
+	"messages": {
+		"COOLDOWN_MESSAGE": "You are on `<duration>` cooldown!"
+	}
+}
