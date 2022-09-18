@@ -98,7 +98,7 @@ class CustomerController extends Controller
         $discord = $request->discord;
         $order = $request->order;
         if (!isset($discord)) return response()->json(['error' => 'Missing Discord ID'], 400);
-        if (!isset($discord)) return response()->json(['error' => 'Missing Order ID'], 400);
+        if (!isset($order)) return response()->json(['error' => 'Missing Order ID'], 400);
 
         $customer = Customer::where('discord_id', "=", $discord)->first();
 
