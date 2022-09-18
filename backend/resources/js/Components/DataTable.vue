@@ -1,7 +1,8 @@
 
 <template>
     <div class="w-full">
-        <div class="bg-slate-800/70 rounded-md border border-slate-700/40 shadow-md my-6">
+        <h1 className="text-slate-200 text-xl font-bold mt-6 leading-tight">Latest Orders:</h1>
+        <div class="bg-slate-800/70 rounded-md border border-slate-700/40 shadow-md mt-4">
             <table class="min-w-max w-full table-auto">
                 <thead>
                     <tr class="bg-slate-800/70 rounded-md border border-slate-700/40 text-gray-300 uppercase text-sm leading-normal">
@@ -45,7 +46,7 @@
                             </div>
                         </td>
                         <td class="py-3 px-6 text-center">
-                            <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Active</span>
+                            <span class="bg-green-500/20 text-green-500 py-1 px-3 rounded-full text-xs">Active</span>
                         </td>
                         <td class="py-3 px-6 text-center">
                             <div class="flex item-center justify-center">
@@ -97,7 +98,7 @@
                             </div>
                         </td>
                         <td class="py-3 px-6 text-center">
-                            <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Active</span>
+                            <span class="bg-green-500/20 text-green-500 py-1 px-3 rounded-full text-xs">Active</span>
                         </td>
                         <td class="py-3 px-6 text-center">
                             <div class="flex item-center justify-center">
@@ -149,11 +150,11 @@
                             </div>
                         </td>
                         <td class="py-3 px-6 text-center">
-                            <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Active</span>
+                            <span class="bg-red-500/20 text-red-500 py-1 px-3 rounded-full text-xs">Inactive</span>
                         </td>
                         <td class="py-3 px-6 text-center">
                             <div class="flex item-center justify-center">
-                                <div class="w-4 mr-2 transform hover:text-green-500 hover:scale-110">
+                                <div class="w-4 mr-2 transform hover:text-red-500 hover:scale-110">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />

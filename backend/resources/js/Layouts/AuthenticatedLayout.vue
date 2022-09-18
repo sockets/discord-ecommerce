@@ -30,14 +30,11 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
-                                <NavLink :href="route('product')" :active="route().current('product')">
-                                    Product
+                                <NavLink :href="route('products')" :active="route().current('products')">
+                                    Products
                                 </NavLink>
                                 <NavLink :href="route('users')" :active="route().current('users')">
                                     Users
-                                </NavLink>
-                                <NavLink :href="route('keys')" :active="route().current('keys')">
-                                    Keys
                                 </NavLink>
                                 <NavLink :href="route('settings')" :active="route().current('settings')">
                                     Settings
@@ -88,14 +85,11 @@ const showingNavigationDropdown = ref(false);
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('product')" :active="route().current('product')">
-                            Product
+                        <ResponsiveNavLink :href="route('products')" :active="route().current('products')">
+                            Products
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('users')" :active="route().current('users')">
                             Users
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('keys')" :active="route().current('keys')">
-                            Keys
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('settings')" :active="route().current('settings')">
                             Settings

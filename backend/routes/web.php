@@ -23,22 +23,20 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-    Route::get('/product', function () {
-        return Inertia::render('Product');
-    })->name('product');
+    Route::get('/products', function () {
+        return Inertia::render('Products');
+    })->name('products');
     Route::get('/settings', function () {
         return Inertia::render('Settings');
     })->name('settings');
     Route::get('/users', function () {
         return Inertia::render('Users');
     })->name('users');
-    Route::get('/keys', function () {
-        return Inertia::render('Keys');
-    })->name('keys');
 });
 
 require __DIR__.'/auth.php';
