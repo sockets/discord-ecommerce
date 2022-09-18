@@ -34,9 +34,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/settings', function () {
         return Inertia::render('Settings');
     })->name('settings');
-    Route::get('/users', function () {
-        return Inertia::render('Users');
-    })->name('users');
+    Route::get('/customers', function () {
+        return Inertia::render('Customers');
+    })->name('customers');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

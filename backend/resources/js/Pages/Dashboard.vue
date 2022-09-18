@@ -18,7 +18,7 @@ import DataTable from '@/Components/DataTable.vue';
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="grid grid-cols-4 gap-4">
-                    <StatisticCard title="Recurring Revenue" data="$300/mo" icon="fa-solid fa-chart-line"/>
+                    <StatisticCard title="Months Revenue" data="$300.00" icon="fa-solid fa-chart-line"/>
                     <StatisticCard title="Orders This Month" data="4" icon="fa-solid fa-tags"/>
                     <StatisticCard title="New Users" data="2" icon="fa-solid fa-user"/>
                     <StatisticCard title="Active Subscriptions" data="7" icon="fa-solid fa-sack-dollar"/>
