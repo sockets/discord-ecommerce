@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('discord_id');
+            $table->string('discord_id')->unique();
             $table->string('username');
-            $table->string('stripe_customer');
+            $table->string('stripe_customer')->nullable();
             $table->string('billing_email')->nullable();
             $table->string('billing_name')->nullable();
             $table->string('billing_address')->nullable();
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('billing_card_last4')->nullable();
             $table->string('billing_name_on_card')->nullable();
             $table->string('billing_card_type')->nullable();
-            $table->string('total_spent');
+            $table->double('total_spent')->default(0);
             $table->timestamps();
         });
     }
