@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'customers', 'middleware' => ['api.auth']], function () {
     Route::post('/', [\App\Http\Controllers\CustomerController::class, 'store']);
-    Route::get('/{discord}', [\App\Http\Controllers\CustomerController::class, 'show']);
+    Route::get('/{discord}', [\App\Http\Controllers\CustomerController::class, 'getByDiscordId']);
     Route::put('/{discord}', [\App\Http\Controllers\CustomerController::class, 'update']);
     Route::get('/{discord}/orders', [\App\Http\Controllers\CustomerController::class, 'getCustomerOrders']);
     Route::get('/{discord}/orders/{order}', [\App\Http\Controllers\CustomerController::class, 'getCustomerOrder']);
