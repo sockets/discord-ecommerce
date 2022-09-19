@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,13 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $products = Product::orderBy('id', 'desc')
+            ->paginate(5);
+        return Inertia::render('Products/index', compact('products'));
+    }
 
+    public function getProducts()
+    {
         $productFilter = [["status", "=", 1], ["stock", ">", 0]];
         $products = Product::where($productFilter)->get();
         $filteredProducts = collect($products)
@@ -31,6 +38,27 @@ class ProductController extends Controller
         return response()->json([
             "productsFound" => count($filteredProducts),
             "products" => $filteredProducts,
+        ], 200);
+    }
+
+    public function getProduct(Request $request)
+    {
+        $productId = $request->product;
+        if (!isset($productId)) return response()->json(['error' => 'Missing Product ID'], 400);
+
+        $product = Product::where('id', "=", $productId)->first();
+
+        if ($product == null) return response()->json(['error' => 'Product Not Found'], 404);
+
+        return response()->json([
+            "product" => [
+                'id' => $product->id,
+                'name' => $product->name,
+                'description' => $product->description,
+                'price' => $product->price,
+                'stock' => $product->stock,
+                'type' => $product->type
+            ],
         ], 200);
     }
 
@@ -61,25 +89,25 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(Product $product)
     {
-        $productId = $request->product;
-        if (!isset($productId)) return response()->json(['error' => 'Missing Product ID'], 400);
 
-        $product = Product::where('id', "=", $productId)->first();
+        $product = [
+            'id' => $product->id,
+            'name' => $product->name,
+            'description' => $product->description,
+            'price' => $product->price,
+            'status' => $product->status,
+            'stripe_product' => $product->stripe_product,
+            'stripe_price' => $product->stripe_price,
+            'stock' => $product->stock,
+            'type' => $product->type,
+            'total_revenue' => $product->total_revenue(),
+            'months_order_count' => $product->months_order_count(),
+            'total_order_count' => $product->order_count()
+        ];
 
-        if ($product == null) return response()->json(['error' => 'Product Not Found'], 404);
-
-        return response()->json([
-            "product" => [
-                'id' => $product->id,
-                'name' => $product->name,
-                'description' => $product->description,
-                'price' => $product->price,
-                'stock' => $product->stock,
-                'type' => $product->type
-            ],
-        ], 200);
+        return Inertia::render('Products/product', compact('product'));
     }
 
     /**

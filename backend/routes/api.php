@@ -2,9 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,14 +15,14 @@ use App\Http\Controllers\OrderController;
 
 
 Route::group(['prefix' => 'customers', 'middleware' => ['api.auth']], function () {
-    Route::post('/', [CustomerController::class, 'store']);
-    Route::get('/{discord}', [CustomerController::class, 'show']);
-    Route::put('/{discord}', [CustomerController::class, 'update']);
-    Route::get('/{discord}/orders', [CustomerController::class, 'getCustomerOrders']);
-    Route::get('/{discord}/orders/{order}', [CustomerController::class, 'getCustomerOrder']);
+    Route::post('/', [\App\Http\Controllers\CustomerController::class, 'store']);
+    Route::get('/{discord}', [\App\Http\Controllers\CustomerController::class, 'show']);
+    Route::put('/{discord}', [\App\Http\Controllers\CustomerController::class, 'update']);
+    Route::get('/{discord}/orders', [\App\Http\Controllers\CustomerController::class, 'getCustomerOrders']);
+    Route::get('/{discord}/orders/{order}', [\App\Http\Controllers\CustomerController::class, 'getCustomerOrder']);
 });
 
 Route::group(['prefix' => 'products', 'middleware' => ['api.auth']], function () {
-    Route::get('/', [ProductController::class, 'index']);
-    Route::get('/{product}', [ProductController::class, 'show']);
+    Route::get('/', [\App\Http\Controllers\ProductController::class, 'getProducts']);
+    Route::get('/{product}', [\App\Http\Controllers\ProductController::class, 'getProduct']);
 });

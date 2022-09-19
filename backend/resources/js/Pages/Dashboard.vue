@@ -2,7 +2,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import StatisticCard from '@/Components/StatisticCard.vue';
-import DataTable from '@/Components/DataTable.vue';
 </script>
 
 <template>
@@ -23,7 +22,6 @@ import DataTable from '@/Components/DataTable.vue';
                     <StatisticCard title="New Users" data="2" icon="fa-solid fa-user"/>
                     <StatisticCard title="Active Subscriptions" data="7" icon="fa-solid fa-sack-dollar"/>
                 </div>
-                <DataTable/>
             </div>
         </div>
     </AuthenticatedLayout>

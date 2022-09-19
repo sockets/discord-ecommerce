@@ -28,9 +28,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-    Route::get('/products', function () {
-        return Inertia::render('Products');
-    })->name('products');
+
+    Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index'])
+        ->name('products');
+
+    Route::get('/products/{product}', [\App\Http\Controllers\ProductController::class, 'show']);
+
     Route::get('/settings', function () {
         return Inertia::render('Settings');
     })->name('settings');
