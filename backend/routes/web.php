@@ -42,6 +42,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{customer}', [\App\Http\Controllers\CustomerController::class, 'show']);
     });
 
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('/', [\App\Http\Controllers\OrderController::class, 'index'])
+            ->name('orders');
+        Route::get('/{order}', [\App\Http\Controllers\OrderController::class, 'show']);
+    });
+
     Route::get('/settings', function () {
         return Inertia::render('Settings');
     })->name('settings');
