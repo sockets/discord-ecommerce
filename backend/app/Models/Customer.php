@@ -46,4 +46,9 @@ class Customer extends Model
     {
         return $this->hasMany(Order::class, "id", "customer")->get();
     }
+
+    public function total_orders()
+    {
+        return count($this->hasMany(Order::class, "id", "customer")->get());
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Order;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -15,7 +16,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::orderBy('id', 'desc')
+            ->paginate(5);
+        return Inertia::render('Customers/index', compact('customers'));
     }
 
     /**
@@ -56,7 +59,32 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(Customer $customer)
+    {
+        $customer = [
+            'id' => $customer->id,
+            'discord_id' => $customer->discord_id,
+            'username' => $customer->username,
+            'stripe_customer' => $customer->stripe_customer,
+            'billing_email' => $customer->billing_email,
+            'billing_name' => $customer->billing_name,
+            'billing_address' => $customer->billing_address,
+            'billing_city' => $customer->billing_city,
+            'billing_state' => $customer->billing_state,
+            'billing_zipcode' => $customer->billing_zipcode,
+            'billing_country' => $customer->billing_country,
+            'billing_phone' => $customer->billing_phone,
+            'billing_card_last4' => $customer->billing_card_last4,
+            'billing_name_on_card' => $customer->billing_name_on_card,
+            'billing_card_type' => $customer->billing_card_type,
+            'total_spent' => $customer->total_spent,
+            'total_orders' => $customer->total_orders()
+        ];
+
+        return Inertia::render('Customers/customer', compact('customer'));
+    }
+
+    public function getByDiscordId(Request $request)
     {
         $discord = $request->discord;
         if (!isset($discord)) return response()->json(['error' => 'Missing Discord ID'], 400);

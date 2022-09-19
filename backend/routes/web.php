@@ -25,21 +25,26 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index'])
-        ->name('products');
+    Route::group(['prefix' => 'products'], function () {
+        Route::get('/', [\App\Http\Controllers\ProductController::class, 'index'])
+            ->name('products');
+        Route::get('/{product}', [\App\Http\Controllers\ProductController::class, 'show']);
+    });
 
-    Route::get('/products/{product}', [\App\Http\Controllers\ProductController::class, 'show']);
+    Route::group(['prefix' => 'customers'], function () {
+        Route::get('/', [\App\Http\Controllers\CustomerController::class, 'index'])
+            ->name('customers');
+        Route::get('/{customer}', [\App\Http\Controllers\CustomerController::class, 'show']);
+    });
 
     Route::get('/settings', function () {
         return Inertia::render('Settings');
     })->name('settings');
-    Route::get('/customers', function () {
-        return Inertia::render('Customers');
-    })->name('customers');
 });
 
 require __DIR__ . '/auth.php';
