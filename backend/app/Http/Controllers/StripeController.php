@@ -20,7 +20,7 @@ class StripeController extends Controller
 
         if ($customer == null) return response()->json(['error' => 'Customer Not Found'], 404);
 
-        $product = Product::where(["id", "=", $productId])->first();
+        $product = Product::where("id", "=", $productId)->first();
 
         if ($product == null) return response()->json(['error' => 'Product Not Found'], 404);
         if ($product->stripe_product == null || $product->stripe_price == null) return response()->json(['error' => 'Product is missing stripe connection'], 400);
@@ -37,10 +37,6 @@ class StripeController extends Controller
             'mode' => 'payment',
             'allow_promotion_codes' => true,
             'billing_address_collection' => 'required',
-            'customer_update' => [
-                "name" => 'auto',
-                "address" => 'auto'
-            ],
             'success_url' => $YOUR_DOMAIN . "/success?session_id={CHECKOUT_SESSION_ID}",
             'cancel_url' => $YOUR_DOMAIN . "/cancel",
 
@@ -49,12 +45,21 @@ class StripeController extends Controller
                 'discord' => $customer->discord_id,
                 'product' => $product->id
             ],
-            'subscription_data' => []
         ];
 
-        if ($customer->stripe_customer != null) array_push($sessionParams, ['customer' => $customer->stripe_customer]);
+        if ($customer->stripe_customer != null) array_push($sessionParams, ['customer' => $customer->stripe_customer, 'customer_update' => ["name" => 'auto', "address" => 'auto']]);
 
-        $checkoutSession = $stripe->checkout->sessions->create($sessionParams);
+        try {
+            $checkoutSession = $stripe->checkout->sessions->create($sessionParams);
+        } catch (\Stripe\Exception\InvalidRequestException $e) {
+            return response()->json([
+                "error" => "Invalid Stripe Price",
+            ], 404);
+        } catch (\Exception $e) {
+            return response()->json([
+                "error" => "Error creating checkout link",
+            ], 400);
+        }
 
         return [
             "status" => "success",
