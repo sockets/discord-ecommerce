@@ -15,5 +15,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <textarea class="bg-slate-700 text-gray-200 border-slate-600 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" ref="textarea"></textarea>
+    <textarea class="bg-slate-900/40 text-gray-200 border-slate-700 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" ref="textarea"></textarea>
 </template>
